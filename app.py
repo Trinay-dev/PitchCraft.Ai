@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -9,8 +9,7 @@ from pptx.chart.data import CategoryChartData
 # ================= GEMINI =================
 import os
 
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-model = genai.GenerativeModel("models/gemini-1.5-flash")
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 
 # ================= UI =================
@@ -39,8 +38,13 @@ Return EXACTLY in this format:
 4. Elevator Pitch:
 """
 
-    response = model.generate_content(prompt)
-    ai_text = response.text
+   response = client.models.generate_content(
+    model="gemini-1.5-flash",
+    contents=prompt
+)
+
+ai_text = response.text
+
 
     parts = ai_text.split("2.")
     problem = parts[0].replace("1. Problem:", "").strip()
@@ -139,6 +143,7 @@ Return EXACTLY in this format:
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
 
 
 
