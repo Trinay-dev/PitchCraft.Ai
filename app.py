@@ -1,5 +1,4 @@
 import streamlit as st
-from google import genai
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -9,7 +8,9 @@ from pptx.chart.data import CategoryChartData
 # ================= GEMINI =================
 import os
 
-client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+from google import genai
+client = genai.Client(...)
+
 
 
 # ================= UI =================
@@ -43,7 +44,7 @@ if st.button("Generate"):
     """
 
     response = client.models.generate_content(
-        model="gemini-1.5-flash",
+        model="models/gemini-1.5-flash",
         contents=prompt
     )
 
@@ -148,6 +149,7 @@ if st.button("Generate"):
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
 
 
 
