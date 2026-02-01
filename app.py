@@ -9,7 +9,7 @@ from pptx.chart.data import CategoryChartData
 import os
 
 from google import genai
-client = genai.Client(...)
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 
 
@@ -149,6 +149,7 @@ if st.button("Generate"):
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
 
 
 
