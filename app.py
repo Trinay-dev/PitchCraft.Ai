@@ -18,7 +18,8 @@ customers = st.number_input("Customers (Month 1)", min_value=1)
 
 # ---------------- GEMINI REST ----------------
 def call_gemini(prompt):
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent"
+
 
 
     payload = {
@@ -95,4 +96,5 @@ Elevator Pitch:
 
     with open("pitchcraft.pptx", "rb") as f:
         st.download_button("Download PPT", f, file_name="pitchcraft.pptx")
+
 
