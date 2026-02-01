@@ -7,8 +7,11 @@ from pptx.enum.chart import XL_CHART_TYPE
 from pptx.chart.data import CategoryChartData
 
 # ================= GEMINI =================
-genai.configure(api_key="AIzaSyAN1Kue2z0LRB7Ob_WTI-S0ngJGpWgNfjw")
-model = genai.GenerativeModel("models/gemini-2.5-flash")
+import os
+
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+model = genai.GenerativeModel("models/gemini-1.5-flash")
+
 
 # ================= UI =================
 st.title("PitchCraft AI")
@@ -136,3 +139,4 @@ Return EXACTLY in this format:
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
