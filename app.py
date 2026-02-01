@@ -22,28 +22,33 @@ cost = st.number_input("Monthly cost", min_value=0)
 customers = st.number_input("Customers (Month 1)", min_value=1)
 
 # ================= GENERATE =================
+# ============== GENERATE ==============
+
+
+
 if st.button("Generate"):
 
     prompt = f"""
-Create a startup pitch.
+    Create a startup pitch.
 
-Business: {idea}
-Customer: {customer}
+    Business: {idea}
+    Customer: {customer}
 
-Return EXACTLY in this format:
+    Return EXACTLY in this format:
 
-1. Problem:
-2. Solution:
-3. Marketing:
-4. Elevator Pitch:
-"""
+    1. Problem:
+    2. Solution:
+    3. Marketing:
+    4. Elevator Pitch:
+    """
 
-   response = client.models.generate_content(
-    model="gemini-1.5-flash",
-    contents=prompt
-)
+    response = client.models.generate_content(
+        model="gemini-1.5-flash",
+        contents=prompt
+    )
 
-ai_text = response.text
+    ai_text = response.text
+
 
 
     parts = ai_text.split("2.")
@@ -143,6 +148,7 @@ ai_text = response.text
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
 
 
 
