@@ -44,7 +44,8 @@ if st.button("Generate"):
     """
 
     response = client.models.generate_content(
-        model="models/gemini-1.5-flash",
+        model="models/gemini-pro",
+
         contents=prompt
     )
 
@@ -149,6 +150,7 @@ if st.button("Generate"):
     prs.save("pitchcraft.pptx")
 
     st.success("PPT created: pitchcraft.pptx")
+
 
 
 
