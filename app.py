@@ -9,15 +9,6 @@ st.set_page_config(page_title="PitchCraft AI", layout="centered")
 st.title("PitchCraft AI")
 
 # ---------------- INPUTS ----------------
-
-idea = st.text_input("Business Idea")
-customer = st.text_input("Target Customer")
-price = st.number_input("Price per customer", min_value=0)
-cost = st.number_input("Monthly cost", min_value=0)
-customers = st.number_input("Customers (Month 1)", min_value=1)
-
-# ---------------- GEMINI REST CALL ----------------
-
 def call_gemini(prompt):
     url = "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent"
 
@@ -37,7 +28,12 @@ def call_gemini(prompt):
 
     result = response.json()
 
-    return result["candidates"][0]["content"]["parts"][0]["text"]
+    # SAFE RETURN (no crash)
+    if "candidates" in result:
+        return result["candidates"][0]["content"]["parts"][0]["text"]
+    else:
+        return "Gemini API error:\n" + json.dumps(result, indent=2)
+
 
 # ---------------- GENERATE ----------------
 
@@ -96,4 +92,5 @@ Elevator Pitch:
 
     with open("pitchcraft.pptx", "rb") as f:
         st.download_button("Download PPT", f, file_name="pitchcraft.pptx")
+
 
