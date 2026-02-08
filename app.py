@@ -15,7 +15,7 @@ customers = st.number_input("Customers (Month 1)", min_value=1)
 
 # ---------------- GEMINI CALL ----------------
 def call_gemini(prompt):
-    url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
     payload = {
         "contents": [
@@ -29,7 +29,7 @@ def call_gemini(prompt):
         url,
         headers={"Content-Type": "application/json"},
         params={"key": st.secrets["GEMINI_API_KEY"]},
-        data=json.dumps(payload),
+        json=payload,
         timeout=30
     )
 
@@ -77,3 +77,4 @@ Return EXACTLY in this format:
 
     with open("pitchcraft.pptx", "rb") as f:
         st.download_button("Download PPT", f, file_name="pitchcraft.pptx")
+
