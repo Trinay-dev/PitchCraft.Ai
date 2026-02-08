@@ -77,4 +77,3 @@ Return EXACTLY in this format:
 
     with open("pitchcraft.pptx", "rb") as f:
         st.download_button("Download PPT", f, file_name="pitchcraft.pptx")
-
